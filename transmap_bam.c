@@ -119,3 +119,42 @@ int sam_parser_next(sam_parser_t *p, bam_vector_t *bv){
     if (bv->size - init_index > 1) qsort(bv->data + init_index, bv->size - init_index, sizeof(bam1_t *), sam_parser_comp);
     return bv->size - init_index;
 }
+
+static int sam_realloc_bam_data(bam1_t *b, size_t desired) /* from htslib-1.15 */
+{
+    uint32_t new_m_data;
+    uint8_t *new_data;
+    new_m_data = desired;
+    kroundup32(new_m_data);
+    if (new_m_data < desired) {
+        errno = ENOMEM; // Not strictly true but we can't store the size
+        return -1;
+    }
+    if ((bam_get_mempolicy(b) & BAM_USER_OWNS_DATA) == 0) {
+        new_data = realloc(b->data, new_m_data);
+    } else {
+        if ((new_data = malloc(new_m_data)) != NULL) {
+            if (b->l_data > 0)
+                memcpy(new_data, b->data,
+                       b->l_data < b->m_data ? b->l_data : b->m_data);
+            bam_set_mempolicy(b, bam_get_mempolicy(b) & (~BAM_USER_OWNS_DATA));
+        }
+    }
+    if (!new_data) return -1;
+    b->data = new_data;
+    b->m_data = new_m_data;
+    return 0;
+}
+int bam_set_cigar(bam1_t *b, uint32_t *new_cigars, uint32_t new_n_cigar){
+    int32_t byte_shift = ((int32_t)new_n_cigar - (int32_t)b->core.n_cigar)<<2u;
+    if (byte_shift != 0) {
+        size_t desired = b->l_data + byte_shift;
+        if (desired > b->m_data && (sam_realloc_bam_data(b, desired) < 0)) return -1;
+        uint8_t *s = (uint8_t *)bam_get_seq(b);
+        memmove(s + byte_shift, s,  b->l_data - (s - b->data));
+        b->l_data += byte_shift;
+        b->core.n_cigar = new_n_cigar;
+    }
+    memmove(bam_get_cigar(b), new_cigars, new_n_cigar<<2u);
+    return 0;
+}

@@ -43,3 +43,5 @@ void bam_vector_destroy(bam_vector_t *bv);
 sam_parser_t *sam_parser_open(const char* fn);
 int sam_parser_close(sam_parser_t *p);
 int sam_parser_next(sam_parser_t *p, bam_vector_t *bv);
+
+int bam_set_cigar(bam1_t *b, uint32_t *new_cigars, uint32_t new_n_cigar);

@@ -52,4 +52,45 @@ bed_dict_t *bed_parse(const char* fname);
 void bed_free(bed_dict_t *bed);
 void bed_search1(bed_dict_t *bed, bam1_t *b, vec_t(bed) *hits);
 void bed_search2(bed_dict_t *bed, bam1_t *r1, bam1_t *r2, vec_t(bed) *hits, int mode);
+static int bed_search_comp(const void *b1, const void *b2){
+    return (*(bed_t **)b1)->new_tid - (*(bed_t **)b2)->new_tid;
+}
+static inline void bed_search(bioidx_t *idx, int32_t key, int32_t start, int32_t end, vec_t(bed) *hits){
+    bioidx_itr_t itr;
+    bed_t *hit;
+    if (bioidx_search(idx, &itr, key, start, end) != 0) return;
+    while ((hit = bioidx_itr_next(&itr))) vec_add(bed, hits, hit);
+}
+
+static inline void bed_search_one(bioidx_t *idx, int32_t key, int32_t start, int32_t end, vec_t(bed) *hits){
+    vec_clear(bed, hits);
+    bed_search(idx, key, start, end, hits);
+    if (hits->size) qsort(hits->data, hits->size, sizeof(*(hits->data)), bed_search_comp);
+}
+
+static inline void bed_search_any(bioidx_t *idx, int32_t key, int32_t start1, int32_t end1, int32_t start2, int32_t end2, vec_t(bed) *hits){
+    vec_clear(bed, hits);
+    bed_search(idx, key, start1, end1, hits);
+    bed_search(idx, key, start2, end2, hits);
+    if (hits->size) {
+        qsort(hits->data, hits->size, sizeof(*(hits->data)), bed_search_comp);
+        int i, j;
+        for (i = 0, j = 1; j < hits->size; ++j){
+            if (hits->data[j]->new_tid != hits->data[i]->new_tid) hits->data[++i] = hits->data[j];
+        }
+        hits->size = i + 1;
+    }
+};
+
+static inline void bed_search_both(bioidx_t *idx, int32_t key, int32_t start1, int32_t end1, int32_t start2, int32_t end2, vec_t(bed) *hits){
+    vec_clear(bed, hits);
+    bed_search(idx, key, start1, end1, hits);
+    bed_search(idx, key, start2, end2, hits);
+    qsort(hits->data, hits->size, sizeof(*(hits->data)), bed_search_comp);
+    int i, j;
+    for (i = 0, j = 0; j < hits->size - 1; ++j) {
+        if (hits->data[j]->new_tid == hits->data[j + 1]->new_tid) hits->data[i++] = hits->data[j];
+    }
+    hits->size = i;
+}
 #endif /* __TRANSCRIPT_BED_H */
