@@ -5,6 +5,7 @@ Overview
 Installation
 ====
 ```sh
+cd /path/to/souce
 mkdir build && cd build 
 cmake .. 
 make
