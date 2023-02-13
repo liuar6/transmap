@@ -204,8 +204,7 @@ Usage:  transmap [options] --fi <alignment file> --fo <output file> --bed <bed f
 --both-mate         : require both mate of paired-end alignments to be mapped for reporting.\n\
 --fix-NH            : fix the NH and HI tag.\n\
 --fix-MD            : fix the MD tag if exists.\n\
---fix-NM            : fix the NM tag when --fix-MD is specified. \n\
--h                  : show help informations.\n\n";
+--fix-NM            : fix the NM tag when --fix-MD is specified. \n\n";
     if (msg==NULL || msg[0] == '\0') fprintf(stderr, "%s", usage_info);
     else fprintf(stderr, "%s\n\n%s", msg, usage_info);
     exit(1);
