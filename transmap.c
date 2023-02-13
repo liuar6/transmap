@@ -195,7 +195,7 @@ Usage:  transmap [options] --fi <alignment file> --fo <output file> --bed <bed f
 -i/--fi             : input bam file sorted (or grouped) by query name.\n\
 -o/--fo             : output bam file.\n\
 -b/--bed            : bed file providing the regions on which the alignments to be generated.\n\
--g/--gtf            : gtf file providing the exons of transcripts regions on which the alignments to be generated.\n\
+-g/--gtf            : gtf file providing the exons of transcripts on which the alignments to be generated.\n\
 --gtf-feature       : gtf feature used to define the member exons of transcripts. default: exon.\n\
 --gtf-attribute     : gtf attribute used as the reference name of the output. default: transcript_id.\n\
 --partial           : also process the alignments with ranges exceed the target boundaries.\n\
