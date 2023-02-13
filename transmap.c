@@ -190,17 +190,16 @@ void transmap_version(){
 
 void transmap_usage(const char* msg){
     const char *usage_info = "\
-transmap: convert genomic alignments to transcriptome.\n\
 Usage:  transmap [options] --fi <alignment file> --fo <output file> --bed <bed file>\n\
 [options]\n\
--i/--fi             : input bam file sorted (or grouped) by read name. [required]\n\
--o/--fo             : output bam file. [required]\n\
--b/--bed            : bed file providing the coordinates of target regions. [required]\n\
--g/--gtf            : gtf file providing the coordinates of target transcripts. [required]\n\
---gtf-feature       : gtf feature used to define regions of transcripts. default: exon.\n\
---gtf-attribute     : gtf attribute used as the name of transcripts. default: transcript_id.\n\
---partial           : also process the bam records not fully (partially) contained by the target regions.\n\
---no-trim           : do not trim the marginal I or N for bam records when --partial is specified.\n\
+-i/--fi             : input bam file sorted (or grouped) by query name.\n\
+-o/--fo             : output bam file.\n\
+-b/--bed            : bed file providing the regions on which the alignments to be generated.\n\
+-g/--gtf            : gtf file providing the exons of transcripts regions on which the alignments to be generated.\n\
+--gtf-feature       : gtf feature used to define the member exons of transcripts. default: exon.\n\
+--gtf-attribute     : gtf attribute used as the reference name of the output. default: transcript_id.\n\
+--partial           : also process the alignments with ranges exceed the target boundaries.\n\
+--no-trim           : do not trim the marginal D or N cigars when --partial is specified.\n\
 --both-mate         : require both mate of paired-end alignments to be mapped for reporting.\n\
 --fix-NH            : fix the NH and HI tag.\n\
 --fix-MD            : fix the MD tag if exists.\n\
