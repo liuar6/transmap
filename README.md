@@ -2,6 +2,13 @@ Overview
 ====
 **transmap** takes alignments to the reference genome as input and produces alignments to genomic regions (BED mode) or transcripts (GTF mode). transmap has two major mode: BED mode and GTF mode. In BED mode, the input alignments are transformed just like they are aligned to the  genomic regions defined by the BED file. In GTF mode, the input alignments are transformed as they are aligned to  the single- or multi-exon transcripts defined by the GTF file. The main difference between BED mode and GTF mode is that the BED mode can produce intron-containing alignments while for GTF mode, the introns of the input alignments should be compatible with the exon structure of the transcripts and will be stitched in the transformed alignments. Thus GTF mode will not produce alignments with introns.
 
+Installation
+====
+mkdir build && cd build
+cmake ..
+make
+mv transmap ~/bin/
+
 Usage
 ====
  | option&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | description
@@ -18,3 +25,8 @@ Usage
 --fix-NH | Fix the NH and HI tag. NH indicates number of reported alignments that contain the query in the current record and NI indicates the index of the current record of all reported alignments. Remapping  could make these information invalid, set this option to rebuild a valid NH and HI.
 --fix-MD | Fix the MD tag. When an alignment record is trimmed or the target is in reverse strand, the orginal MD could become invalid, set this option to rebuild a valid MD. Fixing requires the alignments contains an original MD tag.
 --fix-NM | Fix the NM tag. When an alignment record is trimmed, the original NM could become invalid, set this option to recalculate a valid NM. Fixing requires an original MD (original NM is not nessesary).
+
+Author
+====
+Anrui Liu  (liuar6@gmail.com)
+
