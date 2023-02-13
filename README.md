@@ -1,6 +1,6 @@
 transmap
 ====
- | option | description
+ | option&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | description
  ---- | ---- 
  -i / --fi | input sam/bam file sorted (or grouped) by read name. If the input bam contained alignments of paired-end reads, "HI" tag must present for transmap to identified paired alignments.
 -o / --fo | output sam/bam file. The suffix ".sam" or ".bam" indicates the output format.
@@ -10,16 +10,7 @@ transmap
 --gtf-attribute | GTF attribute used as the reference name of the output. default: transcript_id. It should be noted that the transcript_name is not always unique and must be avoided.
 --partial | This option informs transmap also process the bam records not fully (or partially) contained by the target regions. The alignments that spans 
 --no-trim | Do not trim the marginal I or N for bam records when --partial is specified.
-
--i/--fi                       input bam file sorted (or grouped) by read name.<br>
--o/--fo                    output bam file.<br>
--b/--bed                bed file providing the coordinates of target regions.<br>
--g/--gtf                  gtf file providing the coordinates of target transcripts.<br>
---gtf-feature        gtf feature used to define regions of transcripts. default: exon.<br>
---gtf-attribute     gtf attribute used as the name of transcripts. default: transcript_id.<br>
---partial                 also process the bam records not fully (partially) contained by the target regions.<br>
---no-trim               do not trim the marginal I or N for bam records when --partial is specified.<br>
---both-mate         require both mate of paired-end alignments to be mapped for reporting.<br>
---fix-NH                  fix the NH and HI tag.<br>
---fix-MD                  fix the MD tag if exists.<br>
---fix-NM                  fix the NM tag when --fix-MD is specified.<br>
+--both mate |  This option indicate that for paired-end alignments, both mate should be successfully mapped to the new targets for them to be report.
+--fix-NH | Fix the NH and HI tag. NH indicates number of reported alignments that contain the query in the current record and NI indicates the index of the current record of all reported alignments. Remapping alignments generally will make these information invalid, set this option to rebuild the valid NH and HI.
+--fix-MD | Fix the MD tag. When --partial is specified the alignments might be trimmed and make original MD invalid, set this option to rebuild the valid MD. This require the alignment contain an original MD tag.
+--fix-NM | Fix the NM tag. --partial might also dirupt the validity of NM tag, set this option to rebuild the valid NM. This require the alignment contain an original MD tag (original NM is not nessesary).
