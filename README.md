@@ -2,10 +2,10 @@ transmap
 ====
  | option&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | description
  ---- | ---- 
- -i / --fi | Input sam/bam file sorted (or grouped) by query name. If the input contains paired-end alignments, "HI" tag must be present to decide the paired records. Currently, transmap does not check the sanity of input sam/bam file since this requires caching the query name which could use a alot of memory. Later version might force name-sorted sam/bam file and perform sanity check.
+ -i / --fi | Input sam/bam file sorted (or grouped) by query name. If the input contains paired-end alignments, "HI" tag must be present to decide the paired records. Currently, transmap does not check the sanity of input sam/bam file since this requires caching the query name which could use a lot of memory. Later version might force name-sorted sam/bam file and perform sanity check.
 -o / --fo | Output sam/bam file. The suffix ".sam" or ".bam" indicates the format.
--b / --bed | BED file that provides the regions on which the alignments need to be generated. The name field of BED record will become the reference name of the output and should be unique.
--g / --gtf | GTF file that provides the exons of transcripts on which the alignments need to be generated.
+-b / --bed | BED file that provides the regions on which the alignments to be generated. The name field of BED record will become the reference name of the output and should be unique.
+-g / --gtf | GTF file that provides the exons of transcripts on which the alignments to be generated.
 --gtf-feature | GTF feature used to define the member exons of transcripts. Default: exon. For each transcript, the member exons should be present in the same chromosome and strand and their coordinates should not be overlaped.
 --gtf-attribute | GTF attribute used as the reference name of the output. Default: transcript_id. It should be noted that the transcript_name is not always unique and must be avoided.
 --partial | Also process the alignment records with ranges exceed the target boundaries and these records will be trimmed from the two sides until fully contained by the targets. In GTF mode, this option allows the alignment records exceed the transcript boundaries. The records that exceed the exon ends and overlap with the introns will still be excluded no matter whether --partial is set.
