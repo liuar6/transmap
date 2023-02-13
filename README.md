@@ -1,4 +1,8 @@
-transmap
+Overview
+====
+**transmap** takes alignments to reference genome as input and produces alignments to genomic regions (BED mode) or transcripts (GTF mode). transmap has two major mode: BED mode and GTF mode. In BED mode, the input alignments are transformed as they are aligned to the genomic regions provided by the BED file. In GTF mode, the input alignments are transformed as they are aligned to the single- or multi-exon transcripts defined by the GTF file. The main difference between BED mode and GTF mode is that the BED mode can produce intron-containing alignments while for GTF mode, the introns of the input alignments should be compatible with the exon structure of the transcripts and will be stitched in the transformed alignments. Thus GTF mode will not produce alignments with introns (indicated by the N cigar).
+
+Usage
 ====
  | option&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | description
  ---- | ---- 
