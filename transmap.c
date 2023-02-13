@@ -141,33 +141,33 @@ int main(int argc, char *argv[]) {
         if (r2v->data[i]->core.tid != -1) if (sam_write1(out, new_hdr, r2v->data[i]) < 0) {ret = 1; goto clean_up;}
     }
     fprintf(stderr, "[Read statistics]\n");
-    fprintf(stderr, "Total:\t\t\t\t\t\t%d\n", statistics.n_read_processed);
-    fprintf(stderr, "Mapped unique:\t\t\t\t%d\n", statistics.read_statistics[TRANSMAP_MAPPED]);
-    fprintf(stderr, "Mapped multiple:\t\t\t%d\n", statistics.read_statistics[TRANSMAP_MULTI_MAPPED]);
-    fprintf(stderr, "Unmapped unaligned:\t\t\t%d\n", statistics.read_statistics[TRANSMAP_UNALIGNED]);
+    fprintf(stderr, "Total:                      %d\n", statistics.n_read_processed);
+    fprintf(stderr, "Mapped unique:              %d\n", statistics.read_statistics[TRANSMAP_MAPPED]);
+    fprintf(stderr, "Mapped multiple:            %d\n", statistics.read_statistics[TRANSMAP_MULTI_MAPPED]);
+    fprintf(stderr, "Unmapped unaligned:         %d\n", statistics.read_statistics[TRANSMAP_UNALIGNED]);
     if (options.others & OPTION_REQUIRE_BOTH_MATE){
-        fprintf(stderr, "Unmapped mate unaligned:\t%d\n", statistics.read_statistics[TRANSMAP_MATE_UNALIGNED]);
-        fprintf(stderr, "Unmapped mate missing:\t\t%d\n", statistics.read_statistics[TRANSMAP_MATE_MISSING]);
-        fprintf(stderr, "Unmapped improper pair:\t\t%d\n", statistics.read_statistics[TRANSMAP_PAIR_IMPROPER]);
+        fprintf(stderr, "Unmapped mate unaligned:    %d\n", statistics.read_statistics[TRANSMAP_MATE_UNALIGNED]);
+        fprintf(stderr, "Unmapped mate missing:      %d\n", statistics.read_statistics[TRANSMAP_MATE_MISSING]);
+        fprintf(stderr, "Unmapped improper pair:     %d\n", statistics.read_statistics[TRANSMAP_PAIR_IMPROPER]);
     }
-    fprintf(stderr, "Unmapped no overlap:\t\t%d\n", statistics.read_statistics[TRANSMAP_UNMAPPED_NO_OVERLAP]);
-    if (!(options.others & OPTION_ALLOW_PARTIAL)) fprintf(stderr, "Unmapped partial:\t\t%d\n", statistics.read_statistics[TRANSMAP_UNMAPPED_PARTIAL]);
-    if (options.others & OPTION_GTF_MODE) fprintf(stderr, "Unmapped exon imcompatible:\t%d\n", statistics.read_statistics[TRANSMAP_EXON_IMCOMPATIBLE]);
-    if ((options.others & OPTION_ALLOW_PARTIAL && !(options.others & OPTION_GTF_MODE)) || options.others & OPTION_IRREGULAR) fprintf(stderr, "Unmapped no match:\t\t\t%d\n", statistics.read_statistics[TRANSMAP_UNMAPPED_NO_MATCH]);
+    fprintf(stderr, "Unmapped no overlap:        %d\n", statistics.read_statistics[TRANSMAP_UNMAPPED_NO_OVERLAP]);
+    if (!(options.others & OPTION_ALLOW_PARTIAL)) fprintf(stderr, "Unmapped partial:           %d\n", statistics.read_statistics[TRANSMAP_UNMAPPED_PARTIAL]);
+    if (options.others & OPTION_GTF_MODE) fprintf(stderr, "Unmapped exon imcompatible: %d\n", statistics.read_statistics[TRANSMAP_EXON_IMCOMPATIBLE]);
+    if ((options.others & OPTION_ALLOW_PARTIAL && !(options.others & OPTION_GTF_MODE)) || options.others & OPTION_IRREGULAR) fprintf(stderr, "Unmapped no match:          %d\n", statistics.read_statistics[TRANSMAP_UNMAPPED_NO_MATCH]);
 
     fprintf(stderr, "\n[Alignment statistics]\n");
-    fprintf(stderr, "Total:\t\t\t\t\t\t%d\n", statistics.n_align_processed);
-    fprintf(stderr, "Mapped unique:\t\t\t\t%d\n", statistics.align_statistics[TRANSMAP_MAPPED]);
-    fprintf(stderr, "Mapped multiple:\t\t\t%d\n", statistics.align_statistics[TRANSMAP_MULTI_MAPPED]);
+    fprintf(stderr, "Total:                      %d\n", statistics.n_align_processed);
+    fprintf(stderr, "Mapped unique:              %d\n", statistics.align_statistics[TRANSMAP_MAPPED]);
+    fprintf(stderr, "Mapped multiple:            %d\n", statistics.align_statistics[TRANSMAP_MULTI_MAPPED]);
     if (options.others & OPTION_REQUIRE_BOTH_MATE){
-        fprintf(stderr, "Unmapped mate unaligned:\t%d\n", statistics.align_statistics[TRANSMAP_MATE_UNALIGNED]);
-        fprintf(stderr, "Unmapped mate missing:\t\t%d\n", statistics.align_statistics[TRANSMAP_MATE_MISSING]);
-        fprintf(stderr, "Unmapped improper pair:\t\t%d\n", statistics.align_statistics[TRANSMAP_PAIR_IMPROPER]);
+        fprintf(stderr, "Unmapped mate unaligned:    %d\n", statistics.align_statistics[TRANSMAP_MATE_UNALIGNED]);
+        fprintf(stderr, "Unmapped mate missing:      %d\n", statistics.align_statistics[TRANSMAP_MATE_MISSING]);
+        fprintf(stderr, "Unmapped improper pair:     %d\n", statistics.align_statistics[TRANSMAP_PAIR_IMPROPER]);
     }
-    fprintf(stderr, "Unmapped no overlap:\t\t%d\n", statistics.align_statistics[TRANSMAP_UNMAPPED_NO_OVERLAP]);
-    if (!(options.others & OPTION_ALLOW_PARTIAL)) fprintf(stderr, "Unmapped partial:\t\t%d\n", statistics.align_statistics[TRANSMAP_UNMAPPED_PARTIAL]);
-    if (options.others & OPTION_GTF_MODE) fprintf(stderr, "Unmapped exon imcompatible:\t%d\n", statistics.align_statistics[TRANSMAP_EXON_IMCOMPATIBLE]);
-    if ((options.others & OPTION_ALLOW_PARTIAL && !(options.others & OPTION_GTF_MODE)) || options.others & OPTION_IRREGULAR) fprintf(stderr, "Unmapped no match:\t\t\t%d\n", statistics.align_statistics[TRANSMAP_UNMAPPED_NO_MATCH]);
+    fprintf(stderr, "Unmapped no overlap:        %d\n", statistics.align_statistics[TRANSMAP_UNMAPPED_NO_OVERLAP]);
+    if (!(options.others & OPTION_ALLOW_PARTIAL)) fprintf(stderr, "Unmapped partial:           %d\n", statistics.align_statistics[TRANSMAP_UNMAPPED_PARTIAL]);
+    if (options.others & OPTION_GTF_MODE) fprintf(stderr, "Unmapped exon imcompatible: %d\n", statistics.align_statistics[TRANSMAP_EXON_IMCOMPATIBLE]);
+    if ((options.others & OPTION_ALLOW_PARTIAL && !(options.others & OPTION_GTF_MODE)) || options.others & OPTION_IRREGULAR) fprintf(stderr, "Unmapped no match:          %d\n", statistics.align_statistics[TRANSMAP_UNMAPPED_NO_MATCH]);
 
     ret = 0;
     clean_up:
@@ -505,7 +505,7 @@ sam_hdr_t *hdrmap_bed(sam_hdr_t *hdr, bed_dict_t *bed){
     while (i < hdr_size) {
         j = strchr(hdr_lines + i, '\n') - hdr_lines +1;
         if (strncmp(hdr_lines + i, "@SQ", 3) != 0) {
-            if (sam_hdr_add_lines(new_hdr, hdr_lines + i, j - i) != 0) return -1;
+            if (sam_hdr_add_lines(new_hdr, hdr_lines + i, j - i) != 0) goto clean_up;
         }
         i = j;
     }
