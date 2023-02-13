@@ -4,11 +4,11 @@ Overview
 
 Prerequisites
 ===
-htslib-1.15 or later (https://github.com/samtools/htslib)
+**htslib-1.15** or later (https://github.com/samtools/htslib)
 
 Installation
 ====
-Under **Linux**:
+**Under Linux**:
 ```sh
 cd /path/to/source
 mkdir build && cd build 
@@ -35,5 +35,5 @@ Usage
 
 Author
 ====
-Anrui Liu
+**Anrui Liu** <br>
 contact me: liuar6@gmail.com
