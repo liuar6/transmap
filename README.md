@@ -4,11 +4,12 @@ Overview
 
 Installation
 ====
-mkdir build && cd build
-cmake ..
+```sh
+mkdir build && cd build 
+cmake .. 
 make
 mv transmap ~/bin/
-
+```
 Usage
 ====
  | option&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; | description
