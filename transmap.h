@@ -28,7 +28,7 @@
 #include "transmap_bed.h"
 #include "transmap_gtf.h"
 
-#define TRANSMAP_VERSION "1.0.0"
+#define TRANSMAP_VERSION "1.1.0"
 
 #define OPTION_ALLOW_PARTIAL 1u
 #define OPTION_NO_POLISH 2u
